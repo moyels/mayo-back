@@ -1,0 +1,16 @@
+mybatis-flex:
+  datasource:
+    master:
+      url: jdbc:mariadb://127.0.0.1:3306/ink_mark
+      username: root
+      password: root
+  global-config:
+    print-banner: false
+    key-config:
+      key-type: auto
+    normal-value-of-logic-delete: 0
+    deleted-value-of-logic-delete: 1
+server:
+  port: 48080
+  servlet:
+    context-path: /api
