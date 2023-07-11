@@ -1,8 +1,10 @@
-package top.moyel.mayo.config;
+package top.moyel.mayo.entity;
 
 import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Table;
 import lombok.Data;
+import top.moyel.mayo.config.MpFlexInsertListener;
+import top.moyel.mayo.config.MpFlexUpdateListener;
 
 import java.util.Date;
 

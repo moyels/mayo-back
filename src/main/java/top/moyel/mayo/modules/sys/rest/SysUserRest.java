@@ -42,4 +42,8 @@ public class SysUserRest {
         Page<SysUserVO> pageImpl = Page.of(page, pageSize);
         return sysUserService.pageAs(pageImpl, QueryWrapper.create(), SysUserVO.class);
     }
+
+    @GetMapping("/test")
+    public void testVoidParameter() {
+    }
 }

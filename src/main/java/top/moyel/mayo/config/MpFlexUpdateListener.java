@@ -1,6 +1,7 @@
 package top.moyel.mayo.config;
 
 import com.mybatisflex.annotation.AbstractUpdateListener;
+import top.moyel.mayo.entity.BaseEntity;
 
 /**
  * @author moyel

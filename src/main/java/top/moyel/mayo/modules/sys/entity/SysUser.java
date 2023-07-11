@@ -4,7 +4,7 @@ import com.mybatisflex.annotation.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import top.moyel.mayo.config.BaseEntity;
+import top.moyel.mayo.entity.BaseEntity;
 
 import java.util.Date;
 
