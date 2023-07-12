@@ -38,7 +38,7 @@ public class MayoAdvice implements ResponseBodyAdvice<Object> {
             @NonNull ServerHttpRequest request, @NonNull ServerHttpResponse response
     ) {
         if (Objects.isNull(body)) {
-            return null;
+            return Result.failure();
         }
 
         if (body instanceof Boolean) {
