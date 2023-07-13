@@ -9,6 +9,7 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import top.moyel.mayo.annotation.NoResult;
 import top.moyel.mayo.entity.Result;
@@ -28,7 +29,7 @@ public class MayoAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(@NonNull MethodParameter returnType, @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
-        return !GenericTypeUtil.equalsAny(returnType.getParameterType(), CollectionUtil.newArrayList(Result.class, void.class)) && !Objects.nonNull(returnType.getMethodAnnotation(NoResult.class));
+        return !GenericTypeUtil.equalsAny(returnType.getParameterType(), CollectionUtil.newArrayList(Result.class, ModelAndView.class, void.class)) && !Objects.nonNull(returnType.getMethodAnnotation(NoResult.class));
     }
 
     @Override
