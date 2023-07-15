@@ -48,4 +48,15 @@ public class SysUserRest {
         SysUser sysUser = SysUserMapStruct.INSTANCE.toSaveDTO(sysUserSaveVO);
         return sysUserService.save(sysUser);
     }
+
+    @DeleteMapping("/{id}")
+    public Boolean save(@PathVariable Long id) {
+        return sysUserService.removeById(id);
+    }
+
+    @PutMapping
+    public Boolean update(@Validated @RequestBody SysUserSaveVO sysUserSaveVO) {
+        SysUser sysUser = SysUserMapStruct.INSTANCE.toSaveDTO(sysUserSaveVO);
+        return sysUserService.update(sysUser, SYS_USER.USERNAME.eq(sysUser.getUsername()));
+    }
 }
