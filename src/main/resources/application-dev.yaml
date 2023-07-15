@@ -5,7 +5,7 @@ mybatis-flex:
       username: root
       password: root
   global-config:
-    print-banner: false
+    print-banner: true
     key-config:
       key-type: auto
     normal-value-of-logic-delete: 0

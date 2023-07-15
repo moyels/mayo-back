@@ -4,13 +4,13 @@ import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.moyel.mayo.constant.PageConstant;
 import top.moyel.mayo.constant.ValidationConstant;
+import top.moyel.mayo.modules.sys.entity.SysUser;
+import top.moyel.mayo.modules.sys.mapstruct.SysUserMapStruct;
 import top.moyel.mayo.modules.sys.service.ISysUserService;
+import top.moyel.mayo.modules.sys.vo.SysUserSaveVO;
 import top.moyel.mayo.modules.sys.vo.SysUserVO;
 
 import javax.validation.constraints.NotBlank;
@@ -41,5 +41,11 @@ public class SysUserRest {
     ) {
         Page<SysUserVO> pageImpl = Page.of(page, pageSize);
         return sysUserService.pageAs(pageImpl, QueryWrapper.create(), SysUserVO.class);
+    }
+
+    @PostMapping
+    public Boolean save(@Validated @RequestBody SysUserSaveVO sysUserSaveVO) {
+        SysUser sysUser = SysUserMapStruct.INSTANCE.toSaveDTO(sysUserSaveVO);
+        return sysUserService.save(sysUser);
     }
 }
