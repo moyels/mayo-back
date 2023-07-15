@@ -4,7 +4,6 @@ spring:
 
 sa-token:
   token-name: Mayo-Access-Token
-  jwt-secret-key: Mayo-Access
   timeout: 43200
   token-style: simple-uuid
   is-log: false

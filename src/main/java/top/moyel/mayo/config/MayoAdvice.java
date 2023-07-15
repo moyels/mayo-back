@@ -1,6 +1,7 @@
 package top.moyel.mayo.config;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.json.JSONUtil;
 import lombok.NonNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -52,6 +53,11 @@ public class MayoAdvice implements ResponseBodyAdvice<Object> {
     ) {
         if (Objects.isNull(body)) {
             return Result.failure();
+        }
+
+        if (body instanceof String) {
+            response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+            return JSONUtil.toJsonStr(Result.success(body));
         }
 
         if (body instanceof Boolean) {
