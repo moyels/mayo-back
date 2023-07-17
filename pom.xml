@@ -27,6 +27,7 @@
         <mariadb.version>3.1.4</mariadb.version>
         <hutool.version>5.8.20</hutool.version>
         <satoken.version>1.35.0.RC</satoken.version>
+        <excel-starter.version>1.2.7</excel-starter.version>
     </properties>
     <dependencies>
         <dependency>
@@ -103,6 +104,12 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-json</artifactId>
             <version>${hutool.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.pig4cloud.excel</groupId>
+            <artifactId>excel-spring-boot-starter</artifactId>
+            <version>${excel-starter.version}</version>
         </dependency>
     </dependencies>
 
