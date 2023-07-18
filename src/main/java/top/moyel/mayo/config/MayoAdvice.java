@@ -37,6 +37,7 @@ public class MayoAdvice implements ResponseBodyAdvice<Object> {
 
     @ExceptionHandler(Exception.class)
     public Result<Object> exceptionHandle(Exception exception) {
+        exception.printStackTrace();
         return Result.failure(exception.getLocalizedMessage());
     }
 
