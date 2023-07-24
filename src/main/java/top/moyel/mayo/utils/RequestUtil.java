@@ -6,6 +6,9 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.net.url.UrlQuery;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.ContentType;
+import cn.hutool.json.JSONConfig;
+import cn.hutool.json.JSONUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -36,6 +39,9 @@ public class RequestUtil {
         }
 
         String bodyString = CollectionUtil.join(bodyList, StrUtil.EMPTY);
+        if (StrUtil.equals(ContentType.JSON.getValue(), request.getContentType()) && JSONUtil.isTypeJSON(bodyString)) {
+            bodyString = JSONUtil.toJsonStr(JSONUtil.parse(bodyString), JSONConfig.create());
+        }
 
         return MapUtil.<String, Object>builder().put("qs", qsParameterMap).put("body", bodyString).build();
     }
