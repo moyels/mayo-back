@@ -1,6 +1,6 @@
 package top.moyel.mayo.config;
 
-import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
+import cn.dev33.satoken.jwt.StpLogicJwtForStateless;
 import cn.dev33.satoken.stp.StpLogic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +12,6 @@ import org.springframework.context.annotation.Configuration;
 public class MayoSaTokenConfig {
     @Bean
     public StpLogic getStpLogicJwt() {
-        return new StpLogicJwtForSimple();
+        return new StpLogicJwtForStateless();
     }
 }
