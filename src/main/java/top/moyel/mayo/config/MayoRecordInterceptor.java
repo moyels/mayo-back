@@ -28,6 +28,7 @@ public class MayoRecordInterceptor implements HandlerInterceptor {
             return null;
         }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
-        return String.format("请求方法声明：%s，请求参数：%s", handlerMethod.getMethod().toGenericString(), JSONUtil.toJsonStr(request.getParameterMap()));
+        Object params = RequestUtil.getRequestParams(request);
+        return String.format("请求方法声明：%s，请求参数：%s", handlerMethod.getMethod().toGenericString(), JSONUtil.toJsonStr(params));
     }
 }
