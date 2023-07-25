@@ -3,7 +3,7 @@ package top.moyel.mayo.modules.sys.service.impl;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-import top.moyel.mayo.dto.SysRoleDTO;
+import top.moyel.mayo.modules.sys.dto.SysRoleDTO;
 import top.moyel.mayo.modules.sys.entity.SysRole;
 import top.moyel.mayo.modules.sys.mapper.SysRoleMapper;
 import top.moyel.mayo.modules.sys.service.ISysRoleService;

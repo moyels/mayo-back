@@ -1,4 +1,4 @@
-package top.moyel.mayo.dto;
+package top.moyel.mayo.modules.sys.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

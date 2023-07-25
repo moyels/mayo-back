@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.moyel.mayo.dto.SysRoleDTO;
+import top.moyel.mayo.modules.sys.dto.SysRoleDTO;
 import top.moyel.mayo.modules.sys.service.ISysRoleService;
 
 import java.util.List;
