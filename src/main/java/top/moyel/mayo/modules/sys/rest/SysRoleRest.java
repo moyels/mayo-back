@@ -5,11 +5,13 @@ import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;
 import cn.hutool.json.JSONUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import top.moyel.mayo.modules.sys.dto.SysRoleDTO;
+import top.moyel.mayo.modules.sys.entity.SysRole;
+import top.moyel.mayo.modules.sys.mapstruct.SysRoleMapStruct;
 import top.moyel.mayo.modules.sys.service.ISysRoleService;
+import top.moyel.mayo.modules.sys.vo.SysRoleSaveVO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,5 +43,11 @@ public class SysRoleRest {
         }).collect(Collectors.toList());
 
         return TreeUtil.build(sysRoleTreeNodeList, null);
+    }
+
+    @PostMapping
+    public Boolean saveRole(@Validated @RequestBody SysRoleSaveVO sysRoleSaveVO) {
+        SysRole sysRole = SysRoleMapStruct.INSTANCE.fromSaveVO(sysRoleSaveVO);
+        return sysRoleService.save(sysRole);
     }
 }
