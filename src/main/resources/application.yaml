@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
 
 sa-token:
   token-name: Mayo-Access-Token
