@@ -45,6 +45,12 @@ public class SysRoleRest {
         return TreeUtil.build(sysRoleTreeNodeList, null);
     }
 
+    /**
+     * 新增角色
+     *
+     * @param sysRoleSaveVO 角色数据
+     * @return 新增是否成功
+     */
     @PostMapping
     public Boolean saveRole(@Validated @RequestBody SysRoleSaveVO sysRoleSaveVO) {
         SysRole sysRole = SysRoleMapStruct.INSTANCE.fromSaveVO(sysRoleSaveVO);
