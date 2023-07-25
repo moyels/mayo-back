@@ -1,5 +1,6 @@
 package top.moyel.mayo.modules.sys.rest;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;
@@ -7,11 +8,13 @@ import cn.hutool.json.JSONUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import top.moyel.mayo.constant.TipsConstant;
 import top.moyel.mayo.modules.sys.dto.SysRoleDTO;
 import top.moyel.mayo.modules.sys.entity.SysRole;
 import top.moyel.mayo.modules.sys.mapstruct.SysRoleMapStruct;
 import top.moyel.mayo.modules.sys.service.ISysRoleService;
 import top.moyel.mayo.modules.sys.vo.SysRoleSaveVO;
+import top.moyel.mayo.modules.sys.vo.SysRoleUpdateVO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,5 +58,32 @@ public class SysRoleRest {
     public Boolean saveRole(@Validated @RequestBody SysRoleSaveVO sysRoleSaveVO) {
         SysRole sysRole = SysRoleMapStruct.INSTANCE.fromSaveVO(sysRoleSaveVO);
         return sysRoleService.save(sysRole);
+    }
+
+    /**
+     * 更新角色
+     *
+     * @param sysRoleUpdateVO 角色更新实例
+     * @return 更新是否成功
+     */
+    @PutMapping
+    public Boolean updateRole(@Validated @RequestBody SysRoleUpdateVO sysRoleUpdateVO) {
+        SysRole sysRole = SysRoleMapStruct.INSTANCE.fromUpdateVO(sysRoleUpdateVO);
+        return sysRoleService.updateById(sysRole);
+    }
+
+    /**
+     * 删除角色
+     *
+     * @param roleIdList 角色id列表
+     * @return 删除是否成功
+     */
+    @DeleteMapping
+    public Boolean deleteRoles(@RequestParam(value = "ids") List<Long> roleIdList) {
+        if (CollectionUtil.isEmpty(roleIdList)) {
+            throw new RuntimeException(TipsConstant.PARAM_LIST_IS_EMPTY);
+        }
+
+        return sysRoleService.removeByIds(roleIdList);
     }
 }
