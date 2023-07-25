@@ -25,9 +25,9 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
                 .select("u1.username as create_username", "u1.nickname as create_nickname", "u2.username as update_username", "u2.nickname as update_nickname")
                 .from(SYS_ROLE.as("r"))
                 .leftJoin(SYS_USER).as("u1")
-                .on("r.create_user=u1.id")
+                .on(SYS_USER.ID.eq(SYS_ROLE.CREATE_USER))
                 .leftJoin(SYS_USER).as("u2")
-                .on("r.update_user=u2.id");
+                .on(SYS_USER.ID.eq(SYS_ROLE.UPDATE_USER));
 
         return listAs(wrapper, SysRoleDTO.class);
     }
