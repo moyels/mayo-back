@@ -1,34 +1,32 @@
 package top.moyel.mayo.modules.sys.service.impl;
 
-import com.mybatisflex.core.query.QueryWrapper;
-import com.mybatisflex.spring.service.impl.ServiceImpl;
+import com.github.yulichang.base.MPJBaseServiceImpl;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import org.springframework.stereotype.Service;
 import top.moyel.mayo.modules.sys.dto.SysRoleDTO;
 import top.moyel.mayo.modules.sys.entity.SysRole;
+import top.moyel.mayo.modules.sys.entity.SysUser;
 import top.moyel.mayo.modules.sys.mapper.SysRoleMapper;
 import top.moyel.mayo.modules.sys.service.ISysRoleService;
 
 import java.util.List;
 
-import static top.moyel.mayo.modules.sys.entity.table.SysRoleTableDef.SYS_ROLE;
-import static top.moyel.mayo.modules.sys.entity.table.SysUserTableDef.SYS_USER;
-
 /**
  * @author moyel
  */
 @Service
-public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements ISysRoleService {
+public class SysRoleServiceImpl extends MPJBaseServiceImpl<SysRoleMapper, SysRole> implements ISysRoleService {
     @Override
     public List<SysRoleDTO> listRoles() {
-        QueryWrapper wrapper = QueryWrapper.create()
-                .select(SYS_ROLE.ALL_COLUMNS)
-                .select("u1.username as create_username", "u1.nickname as create_nickname", "u2.username as update_username", "u2.nickname as update_nickname")
-                .from(SYS_ROLE.as("r"))
-                .leftJoin(SYS_USER).as("u1")
-                .on(SYS_USER.ID.eq(SYS_ROLE.CREATE_USER))
-                .leftJoin(SYS_USER).as("u2")
-                .on(SYS_USER.ID.eq(SYS_ROLE.UPDATE_USER));
+        MPJLambdaWrapper<SysRole> wrapper = new MPJLambdaWrapper<SysRole>()
+                .selectAll(SysRole.class)
+                .selectAs("u1", SysUser::getUsername, SysRoleDTO::getCreateUsername)
+                .selectAs("u1", SysUser::getNickname, SysRoleDTO::getCreateNickname)
+                .selectAs("u2", SysUser::getUsername, SysRoleDTO::getCreateUsername)
+                .selectAs("u2", SysUser::getUsername, SysRoleDTO::getUpdateNickname)
+                .leftJoin(SysUser.class, "u1", SysUser::getId, SysRole::getCreateUser)
+                .leftJoin(SysUser.class, "u2", SysUser::getId, SysRole::getUpdateUser);
 
-        return listAs(wrapper, SysRoleDTO.class);
+        return selectJoinList(SysRoleDTO.class, wrapper);
     }
 }

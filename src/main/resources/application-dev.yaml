@@ -1,15 +1,3 @@
-mybatis-flex:
-  datasource:
-    master:
-      url: jdbc:mariadb://127.0.0.1:3306/ink_mark
-      username: root
-      password: root
-  global-config:
-    print-banner: true
-    key-config:
-      key-type: auto
-    normal-value-of-logic-delete: 0
-    deleted-value-of-logic-delete: 1
 server:
   port: 48080
   servlet:
@@ -17,3 +5,23 @@ server:
 
 sa-token:
   jwt-secret-key: mayo-back
+spring:
+  datasource:
+    dynamic:
+      datasource:
+        master:
+          public-key: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFDjuwy/kHrJAAf0wBagittxeh7+EQyVUI99dN8DZt17UeQ1u6EKUSc4kksbid8Zhx7Uc47TOjcDEelUp410Qb2KlrRCssQUs+xqd9jmpbvPJGpBwMMU5bQ4fh6y7/i8U3Sb/DjLLNGFf4Nvvs75Xq0zQeyM2Hit9hL7iYu8L+UQIDAQAB
+          url: ENC(WU6JVyurRJvKYbTuxjB9t1shye+IYMf/x09HLGZfrF/0hLeuhEfUiXKkQaiipnuXbpsl/vTWXNWBjFapJidXoztQtJ4qvg9iKwV/nnFosElyEPD/x2l4J7ajp0/E/Xn+wAsi7eU/ZurPvv2e8klVemfKPrOhgqMas/BDAXQitT4=)
+          username: ENC(dioSpBow6bh7RTTfIP4Ywv6hc0ZqqusuiSbjMLvIJXj29QF5uUOOxbX83AyciSAeHnWHFMFreafD62K0mmJe6yqEjGU5U7VWDI14mZXGy+MdUQexBEcsX/rW3dVC8Yg1XGtcU4DoKF5hK3me/qZ9hujs9Li6YGa9O4eJcQvZJks=)
+          password: ENC(dioSpBow6bh7RTTfIP4Ywv6hc0ZqqusuiSbjMLvIJXj29QF5uUOOxbX83AyciSAeHnWHFMFreafD62K0mmJe6yqEjGU5U7VWDI14mZXGy+MdUQexBEcsX/rW3dVC8Yg1XGtcU4DoKF5hK3me/qZ9hujs9Li6YGa9O4eJcQvZJks=)
+      primary: master
+      p6spy: true
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+mybatis-plus-join:
+  logic-del-type: on

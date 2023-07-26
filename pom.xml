@@ -20,6 +20,10 @@
         <java.version>1.8</java.version>
         <mayo.version>0.0.1</mayo.version>
         <mybatis-flex.version>1.5.2</mybatis-flex.version>
+        <mp.version>3.5.3.1</mp.version>
+        <dd.version>4.1.2</dd.version>
+        <mpj.version>1.4.5</mpj.version>
+        <p6spy.version>3.9.1</p6spy.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <org.projectlombok.version>1.18.28</org.projectlombok.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
@@ -77,9 +81,24 @@
             <version>${org.mapstruct.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.mybatis-flex</groupId>
-            <artifactId>mybatis-flex-spring-boot-starter</artifactId>
-            <version>${mybatis-flex.version}</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>${dd.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.yulichang</groupId>
+            <artifactId>mybatis-plus-join-boot-starter</artifactId>
+            <version>${mpj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+            <version>${p6spy.version}</version>
         </dependency>
 
         <!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
