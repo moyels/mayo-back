@@ -1,10 +1,6 @@
 package top.moyel.mayo.entity;
 
-import com.mybatisflex.annotation.Column;
-import com.mybatisflex.annotation.Table;
 import lombok.Data;
-import top.moyel.mayo.config.MpFlexInsertListener;
-import top.moyel.mayo.config.MpFlexUpdateListener;
 
 import java.util.Date;
 
@@ -12,14 +8,10 @@ import java.util.Date;
  * @author moyel
  */
 @Data
-@Table(value = "base_entity", onInsert = MpFlexInsertListener.class, onUpdate = MpFlexUpdateListener.class, mapperGenerateEnable = false)
 public abstract class BaseEntity {
     private Long createUser;
-    @Column(onInsertValue = "now()")
     private Date createTime;
     private Long updateUser;
-    @Column(onUpdateValue = "now()")
     private Date updateTime;
-    @Column(isLogicDelete = true)
     private Integer deleted;
 }

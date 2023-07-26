@@ -11,8 +11,6 @@ import top.moyel.mayo.modules.sys.vo.SysLoginVO;
 
 import java.util.Optional;
 
-import static top.moyel.mayo.modules.sys.entity.table.SysUserTableDef.SYS_USER;
-
 /**
  * 系统管理/登录相关
  *
@@ -32,7 +30,7 @@ public class LoginRest {
      */
     @PostMapping("/login")
     public String login(@Validated @RequestBody SysLoginVO sysLoginVO) {
-        Optional<SysUser> sysUserOptional = sysUserService.getOneOpt(SYS_USER.USERNAME.eq(sysLoginVO.getUsername()));
+        Optional<SysUser> sysUserOptional = sysUserService.lambdaQuery().eq(SysUser::getUsername, sysLoginVO.getUsername()).oneOpt();
 
         if (!sysUserOptional.isPresent()) {
             throw new RuntimeException(TipsConstant.USER_NOT_FOUND_TIPS);

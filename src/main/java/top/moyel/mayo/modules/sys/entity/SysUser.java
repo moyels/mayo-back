@@ -1,6 +1,7 @@
 package top.moyel.mayo.modules.sys.entity;
 
-import com.mybatisflex.annotation.Table;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -12,10 +13,11 @@ import java.util.Date;
  * @author moyel
  */
 @Data
-@Table(value = "sys_user")
 @ToString(callSuper = true)
+@TableName(value = "sys_user")
 @EqualsAndHashCode(callSuper = true)
 public class SysUser extends BaseEntity {
+    @TableId
     private Long id;
     private String username;
     private String nickname;
