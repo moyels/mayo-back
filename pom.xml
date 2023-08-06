@@ -23,7 +23,7 @@
         <mp.version>3.5.3.1</mp.version>
         <dd.version>4.1.2</dd.version>
         <mpj.version>1.4.5</mpj.version>
-        <p6spy.version>3.9.1</p6spy.version>
+        <p6spy.version>1.8.1</p6spy.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <org.projectlombok.version>1.18.28</org.projectlombok.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
@@ -86,8 +86,8 @@
             <version>${mybatis-flex.version}</version>
         </dependency>
         <dependency>
-            <groupId>p6spy</groupId>
-            <artifactId>p6spy</artifactId>
+            <groupId>com.github.gavlyukovskiy</groupId>
+            <artifactId>p6spy-spring-boot-starter</artifactId>
             <version>${p6spy.version}</version>
         </dependency>
 
