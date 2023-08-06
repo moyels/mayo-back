@@ -1,7 +1,7 @@
 package top.moyel.mayo.modules.sys.rest;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +16,8 @@ import top.moyel.mayo.modules.sys.vo.SysUserVO;
 import javax.validation.constraints.NotBlank;
 import java.util.Optional;
 
+import static top.moyel.mayo.modules.sys.entity.table.SysUserTableDef.SYS_USER;
+
 
 /**
  * @author moyel
@@ -29,11 +31,10 @@ public class SysUserRest {
 
     @GetMapping
     public SysUserVO fetch(@NotBlank(message = ValidationConstant.USERNAME_NOT_BLANK) String username) {
-        MPJLambdaWrapper<SysUser> wrapper = new MPJLambdaWrapper<SysUser>()
-                .selectAsClass(SysUser.class, SysUserVO.class)
-                .eq(SysUser::getUsername, username);
+        Optional<SysUserVO> sysUserOptional = sysUserService.queryChain()
+                .where(SYS_USER.USERNAME.eq(username))
+                .oneAsOpt(SysUserVO.class);
 
-        Optional<SysUserVO> sysUserOptional = Optional.ofNullable(sysUserService.selectJoinOne(SysUserVO.class, wrapper));
         return sysUserOptional.orElse(null);
     }
 
@@ -42,10 +43,8 @@ public class SysUserRest {
             @RequestParam(defaultValue = PageConstant.DEFAULT_PAGE_STR) Integer page,
             @RequestParam(defaultValue = PageConstant.DEFAULT_PAGE_SIZE_STR) Integer pageSize
     ) {
-        Page<SysUserVO> pageImpl = Page.of(page, pageSize);
-
-        MPJLambdaWrapper<SysUser> wrapper = new MPJLambdaWrapper<SysUser>().selectAsClass(SysUser.class, SysUserVO.class);
-        return sysUserService.selectJoinListPage(pageImpl, SysUserVO.class, wrapper);
+        Page<SysUserVO> pageImpl = com.mybatisflex.core.paginate.Page.of(page, pageSize);
+        return sysUserService.pageAs(pageImpl, QueryWrapper.create(), SysUserVO.class);
     }
 
     @PostMapping
@@ -62,6 +61,6 @@ public class SysUserRest {
     @PutMapping
     public Boolean update(@Validated @RequestBody SysUserSaveVO sysUserSaveVO) {
         SysUser sysUser = SysUserMapStruct.INSTANCE.toSaveDTO(sysUserSaveVO);
-        return sysUserService.lambdaUpdate().eq(SysUser::getUsername, sysUser.getUsername()).update(sysUser);
+        return sysUserService.update(sysUser, SYS_USER.USERNAME.eq(sysUser.getUsername()));
     }
 }

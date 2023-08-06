@@ -19,7 +19,7 @@
     <properties>
         <java.version>1.8</java.version>
         <mayo.version>0.0.1</mayo.version>
-        <mybatis-flex.version>1.5.2</mybatis-flex.version>
+        <mybatis-flex.version>1.5.6</mybatis-flex.version>
         <mp.version>3.5.3.1</mp.version>
         <dd.version>4.1.2</dd.version>
         <mpj.version>1.4.5</mpj.version>
@@ -60,6 +60,11 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -76,24 +81,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <version>${org.mapstruct.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mp.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-            <version>${dd.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.yulichang</groupId>
-            <artifactId>mybatis-plus-join-boot-starter</artifactId>
-            <version>${mpj.version}</version>
+            <groupId>com.mybatis-flex</groupId>
+            <artifactId>mybatis-flex-spring-boot-starter</artifactId>
+            <version>${mybatis-flex.version}</version>
         </dependency>
         <dependency>
             <groupId>p6spy</groupId>

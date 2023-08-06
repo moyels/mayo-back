@@ -1,6 +1,6 @@
 package top.moyel.mayo.modules.sys.service;
 
-import com.github.yulichang.base.MPJBaseService;
+import com.mybatisflex.core.service.IService;
 import top.moyel.mayo.modules.sys.dto.SysRoleDTO;
 import top.moyel.mayo.modules.sys.entity.SysRole;
 
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author moyel
  */
-public interface ISysRoleService extends MPJBaseService<SysRole> {
+public interface ISysRoleService extends IService<SysRole> {
     /**
      * 列出role dto
      *

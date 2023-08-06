@@ -1,7 +1,7 @@
 package top.moyel.mayo.modules.sys.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -13,11 +13,11 @@ import top.moyel.mayo.entity.BaseEntity;
  * @author moyel
  */
 @Data
+@Table("sys_user_group")
 @ToString(callSuper = true)
-@TableName("sys_user_group")
 @EqualsAndHashCode(callSuper = true)
 public class SysUserGroup extends BaseEntity {
-    @TableId
+    @Id
     private Long id;
     private String userGroupCode;
     private String userGroupDesc;

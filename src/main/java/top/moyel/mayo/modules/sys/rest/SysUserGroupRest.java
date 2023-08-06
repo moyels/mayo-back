@@ -1,18 +1,21 @@
 package top.moyel.mayo.modules.sys.rest;
 
-import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import com.mybatisflex.core.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import top.moyel.mayo.modules.sys.entity.SysRole;
 import top.moyel.mayo.modules.sys.entity.SysUserGroup;
-import top.moyel.mayo.modules.sys.entity.SysUserGroupRole;
 import top.moyel.mayo.modules.sys.mapstruct.SysUserGroupMapStruct;
 import top.moyel.mayo.modules.sys.service.ISysUserGroupService;
 import top.moyel.mayo.modules.sys.vo.SysUserGroupUpdateVO;
 import top.moyel.mayo.modules.sys.vo.SysUserGroupVO;
 
 import java.util.List;
+
+import static top.moyel.mayo.modules.sys.entity.table.SysRoleTableDef.SYS_ROLE;
+import static top.moyel.mayo.modules.sys.entity.table.SysUserGroupRoleTableDef.SYS_USER_GROUP_ROLE;
+import static top.moyel.mayo.modules.sys.entity.table.SysUserGroupTableDef.SYS_USER_GROUP;
 
 /**
  * 系统管理/用户组管理
@@ -32,7 +35,7 @@ public class SysUserGroupRest {
      */
     @GetMapping
     public List<SysUserGroupVO> list() {
-        return sysUserGroupService.selectJoinList(SysUserGroupVO.class, new MPJLambdaWrapper<>());
+        return sysUserGroupService.listAs(QueryWrapper.create(), SysUserGroupVO.class);
     }
 
     /**
@@ -78,12 +81,11 @@ public class SysUserGroupRest {
      */
     @GetMapping("/roles")
     public List<SysRole> listUserGroupRoles(@RequestParam String userGroupCode) {
-        MPJLambdaWrapper<SysUserGroup> wrapper = new MPJLambdaWrapper<SysUserGroup>()
-                .selectAll(SysRole.class)
-                .leftJoin(SysUserGroupRole.class, SysUserGroupRole::getUserGroupId, SysUserGroup::getId)
-                .leftJoin(SysRole.class, SysRole::getId, SysUserGroupRole::getRoleId)
-                .eq(SysUserGroup::getUserGroupCode, userGroupCode);
-
-        return sysUserGroupService.selectJoinList(SysRole.class, wrapper);
+        return sysUserGroupService.queryChain()
+                .select(SYS_ROLE.ALL_COLUMNS)
+                .leftJoin(SYS_USER_GROUP_ROLE).on(SYS_USER_GROUP_ROLE.USER_GROUP_ID.eq(SYS_USER_GROUP.ID))
+                .leftJoin(SYS_ROLE).on(SYS_ROLE.ID.eq(SYS_USER_GROUP_ROLE.ROLE_ID))
+                .where(SYS_USER_GROUP.USER_GROUP_CODE.eq(userGroupCode))
+                .listAs(SysRole.class);
     }
 }

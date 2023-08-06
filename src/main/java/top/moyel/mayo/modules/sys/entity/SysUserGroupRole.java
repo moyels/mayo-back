@@ -1,7 +1,7 @@
 package top.moyel.mayo.modules.sys.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.Table;
 import lombok.Data;
 
 /**
@@ -10,9 +10,9 @@ import lombok.Data;
  * @author moyel
  */
 @Data
-@TableName("sys_user_group_role")
+@Table("sys_user_group_role")
 public class SysUserGroupRole {
-    @TableId
+    @Id
     private Long id;
     private Long userGroupId;
     private Long roleId;
