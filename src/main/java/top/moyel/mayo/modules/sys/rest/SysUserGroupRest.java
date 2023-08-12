@@ -83,8 +83,11 @@ public class SysUserGroupRest {
     public List<SysRole> listUserGroupRoles(@RequestParam String userGroupCode) {
         return sysUserGroupService.queryChain()
                 .select(SYS_ROLE.ALL_COLUMNS)
-                .leftJoin(SYS_USER_GROUP_ROLE).on(SYS_USER_GROUP_ROLE.USER_GROUP_ID.eq(SYS_USER_GROUP.ID))
-                .leftJoin(SYS_ROLE).on(SYS_ROLE.ID.eq(SYS_USER_GROUP_ROLE.ROLE_ID))
+                .from(SYS_USER_GROUP)
+                .leftJoin(SYS_USER_GROUP_ROLE)
+                .on(SYS_USER_GROUP_ROLE.USER_GROUP_ID.eq(SYS_USER_GROUP.ID))
+                .leftJoin(SYS_ROLE)
+                .on(SYS_ROLE.ID.eq(SYS_USER_GROUP_ROLE.ROLE_ID))
                 .where(SYS_USER_GROUP.USER_GROUP_CODE.eq(userGroupCode))
                 .listAs(SysRole.class);
     }

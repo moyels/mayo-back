@@ -32,6 +32,7 @@ public class SysUserRest {
     @GetMapping
     public SysUserVO fetch(@NotBlank(message = ValidationConstant.USERNAME_NOT_BLANK) String username) {
         Optional<SysUserVO> sysUserOptional = sysUserService.queryChain()
+                .from(SYS_USER)
                 .where(SYS_USER.USERNAME.eq(username))
                 .oneAsOpt(SysUserVO.class);
 
